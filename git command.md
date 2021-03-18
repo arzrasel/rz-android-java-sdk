@@ -10,3 +10,10 @@ git remote add origin https://github.com/rzrasel/rz-android-java-sdk.git
 git pull origin master --allow-unrelated-histories
 git push -u origin master
 ```
+Then
+```gitCommandTwo
+git add .
+git commit -m "Create Project"
+git pull origin master --allow-unrelated-histories
+git push -u origin master
+```
