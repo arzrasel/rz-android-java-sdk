@@ -25,7 +25,7 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     private static String DATABASE_NAME = "db-name.sqlite3";
     private static int DATABASE_VERSION = 1;
     private Context context;
-    private SQLiteDatabase sqLiteDatabase;
+    private SQLiteDatabase sqliteDatabase;
     //
     /*public SQLiteHelper(Context argContext, String argDatabaseName, String argAssetsPath) {
         super(argContext, argDatabaseName, null, DATABASE_VERSION);
@@ -115,8 +115,8 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     }
 
     public boolean onOpenDatabase() throws SQLException {
-        sqLiteDatabase = SQLiteDatabase.openDatabase(SYS_DATABASE_PATH, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-        return sqLiteDatabase != null;
+        sqliteDatabase = SQLiteDatabase.openDatabase(SYS_DATABASE_PATH, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+        return sqliteDatabase != null;
     }
 
     /*public void openDatabase() throws SQLException {
@@ -125,7 +125,7 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     }*/
 
     public synchronized void onCloseDatabase() {
-        if (sqLiteDatabase != null) sqLiteDatabase.close();
+        if (sqliteDatabase != null) sqliteDatabase.close();
         SQLiteDatabase.releaseMemory();
         super.close();
     }
@@ -173,7 +173,7 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     }
 
     public long onInsert(String argTableName, ContentValues argContentValues) {
-        long result = sqLiteDatabase.insert(argTableName, null, argContentValues);
+        long result = sqliteDatabase.insert(argTableName, null, argContentValues);
         //sqLiteDatabase.insert(argTableName, null, argContentValues);
         /*if (result == -1) {
             return false;
@@ -189,9 +189,9 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
         //id = idValue AND name = nameValue
         //NAME + " = ? AND " + LASTNAME + " = ?", new String[]{"Name", "Last name"}
         if (argWhereClause.isEmpty()) {
-            retVal = sqLiteDatabase.update(argTableName, argContentValues, null, null);
+            retVal = sqliteDatabase.update(argTableName, argContentValues, null, null);
         } else {
-            retVal = sqLiteDatabase.update(argTableName, argContentValues, argWhereClause, null);
+            retVal = sqliteDatabase.update(argTableName, argContentValues, argWhereClause, null);
         }
         return retVal;
     }
@@ -200,9 +200,9 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
         //KEY_DATE + "='date' AND " + KEY_GRADE + "='style2' AND " + KEY_STYLE + "='style'"
         int result = -1;
         if (argWhereClause.isEmpty()) {
-            result = sqLiteDatabase.delete(argTableName, null, null);
+            result = sqliteDatabase.delete(argTableName, null, null);
         } else {
-            result = sqLiteDatabase.delete(argTableName, argWhereClause, null);
+            result = sqliteDatabase.delete(argTableName, argWhereClause, null);
         }
         //System.out.println("IS_WORK: " + result);
         //return sqLiteDatabase.delete(argTableName, argWhereClause, null);
@@ -262,12 +262,12 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     }
 
     public Cursor getSqlQueryResults(String argSqlQuery) {
-        Cursor cursor = sqLiteDatabase.rawQuery(argSqlQuery, null);
+        Cursor cursor = sqliteDatabase.rawQuery(argSqlQuery, null);
         return cursor;
     }
 
     public void onRawSqlQuery(String argSqlQuery) {
-        sqLiteDatabase.execSQL(argSqlQuery);
+        sqliteDatabase.execSQL(argSqlQuery);
     }
 
     /*public void onRawQuery(String argSqlQuery) {
@@ -279,6 +279,13 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
         contentValues.put(argKey, argValue);
         return contentValues;
     }
+    /*public boolean getBoolean(int columnIndex) {
+        if (cursor.isNull(columnIndex) || cursor.getShort(columnIndex) == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }*/
 }
 /*
 private SQLiteDBCopyHelper sqLiteDBCopyHelper = null;

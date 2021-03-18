@@ -4,7 +4,7 @@ import android.content.Context;
 
 public class SQLiteManager {
     private Context context;
-    private SQLiteHelper sqLiteHelper = null;
+    public SQLiteHelper sqliteHelper = null;
     //private Cursor cursor;
     private String dbFileName = "db-SQLite.sqlite3";
     private String dbDirName = "/database/";
@@ -41,18 +41,18 @@ public class SQLiteManager {
     }
 
     public SQLiteHelper openDatabase() {
-        sqLiteHelper = new SQLiteHelper(context, dbFileName, dbDirName, dbVersion)
+        sqliteHelper = new SQLiteHelper(context, dbFileName, dbDirName, dbVersion)
                 .setDatabaseVersion(dbVersion);
-        if (sqLiteHelper != null) {
-            sqLiteHelper.onOpenDatabase();
+        if (sqliteHelper != null) {
+            sqliteHelper.onOpenDatabase();
         }
-        return sqLiteHelper;
+        return sqliteHelper;
     }
 
     public void closeDatabase(SQLiteHelper argSqLiteDBCopyHelper) {
-        if (sqLiteHelper != null) {
-            sqLiteHelper.onCloseDatabase();
-            sqLiteHelper = null;
+        if (sqliteHelper != null) {
+            sqliteHelper.onCloseDatabase();
+            sqliteHelper = null;
         }
         if (argSqLiteDBCopyHelper != null) {
             argSqLiteDBCopyHelper = null;
@@ -71,7 +71,7 @@ public class SQLiteManager {
         if (isDebug && !argIsForceBackUp) {
             //System.out.println("|----|--------DEBUG_LOG: DATABASE_BACKUP");
             //SQLiteDBCopyHelper sqLiteDBCopyHelper = new SQLiteDBCopyHelper(context, dbFile, dbDir);
-            sqLiteHelper.onBackupDb();
+            sqliteHelper.onBackupDb();
         }
     }
 }
