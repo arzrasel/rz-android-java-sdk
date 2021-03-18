@@ -1,2 +1,4 @@
+include ':rzandroid-core'
+include ':rzandroid'
 include ':appusagesexample'
 rootProject.name = "Rz Android Java SDK"

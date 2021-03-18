@@ -11,6 +11,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/appusagesexample" />
+            <option value="$PROJECT_DIR$/rzandroid" />
+            <option value="$PROJECT_DIR$/rzandroid-core" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
