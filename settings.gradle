@@ -1,0 +1,2 @@
+include ':appusagesexample'
+rootProject.name = "Rz Android Java SDK"
