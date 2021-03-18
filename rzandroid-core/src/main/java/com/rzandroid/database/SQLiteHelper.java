@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class SQLiteHelper  extends SQLiteOpenHelper {
+public class SQLiteHelper extends SQLiteOpenHelper {
     //private static String DB_PATH = "";
     private static String SYS_DATABASE_PATH = "";
     private static String ASSETS_DATABASE_PATH = "";
@@ -26,6 +26,7 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     private static int DATABASE_VERSION = 1;
     private Context context;
     private SQLiteDatabase sqliteDatabase;
+
     //
     /*public SQLiteHelper(Context argContext, String argDatabaseName, String argAssetsPath) {
         super(argContext, argDatabaseName, null, DATABASE_VERSION);
@@ -273,19 +274,27 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     /*public void onRawQuery(String argSqlQuery) {
         sqLiteDatabase.rawQuery(argSqlQuery, null);
     }*/
+    public boolean getBoolean(Cursor argCursor, int argColumnIndex) {
+        if(argCursor.isNull(argColumnIndex) || argCursor.getShort(argColumnIndex) == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean getBoolean(Cursor argCursor, String argColumnName) {
+        if(argCursor.isNull(argCursor.getColumnIndex(argColumnName)) || argCursor.getShort(argCursor.getColumnIndex(argColumnName)) == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public ContentValues getContentValues(String argKey, String argValue) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(argKey, argValue);
         return contentValues;
     }
-    /*public boolean getBoolean(int columnIndex) {
-        if (cursor.isNull(columnIndex) || cursor.getShort(columnIndex) == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }*/
 }
 /*
 private SQLiteDBCopyHelper sqLiteDBCopyHelper = null;
