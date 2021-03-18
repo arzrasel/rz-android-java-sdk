@@ -1,6 +1,7 @@
 # rz-android-java-sdk
 Rz Android Java SDK
 
+[![Rz Rasel](https://raw.githubusercontent.com/arzrasel/svg/main/rz-rasel-blue.svg)](https://github.com/rzrasel)
 [![Download](https://api.bintray.com/packages/rzrasel/rz-android-java-sdk/rz-android-java-sdk/images/download.svg)](https://bintray.com/rzrasel/rz-android-java-sdk/rz-android-java-sdk/_latestVersion)
 
 ### Add Android Dependencies
