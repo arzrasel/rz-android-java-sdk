@@ -40,7 +40,7 @@ public class SQLiteManager {
         return this;
     }
 
-    protected SQLiteHelper openDatabase() {
+    public SQLiteHelper openDatabase() {
         sqLiteHelper = new SQLiteHelper(context, dbFileName, dbDirName, dbVersion)
                 .setDatabaseVersion(dbVersion);
         if (sqLiteHelper != null) {
@@ -49,7 +49,7 @@ public class SQLiteManager {
         return sqLiteHelper;
     }
 
-    protected void closeDatabase(SQLiteHelper argSqLiteDBCopyHelper) {
+    public void closeDatabase(SQLiteHelper argSqLiteDBCopyHelper) {
         if (sqLiteHelper != null) {
             sqLiteHelper.onCloseDatabase();
             sqLiteHelper = null;

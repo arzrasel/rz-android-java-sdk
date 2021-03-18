@@ -28,6 +28,6 @@ allprojects {
 
 ```android_dependencies
 dependencies {
-    implementation "com.rzandroid.java:rzandroid-core:0.0.03"
+    implementation "com.rzandroid.java:rzandroid-core:0.0.04"
 }
 ```
