@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
+
 //import androidx.core.app.ActivityCompat;
 
 public class ManifestPermissions {
@@ -109,7 +110,6 @@ public class ManifestPermissions {
                     onEventListenerHandler.onPermissionGranted(false);
                 }
             }
-            return;
         }
         // other 'switch' lines to check for other
         // permissions this app might request

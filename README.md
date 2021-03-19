@@ -9,11 +9,11 @@ Rz Android Java SDK
 
 ```android_dependencies
 dependencies {
-    implementation "com.rzandroid.java:rzandroid-core:0.0.04"
+    implementation "com.rzandroid.java:rzandroid-core:0.0.07"
 }
 ```
 
-### Add Maven Repositories
+### Add Maven Repositories (If any problem to implementation)
 
 Add maven repositories in application level (if any problem to implementation then add this code in your gradle file)
 
