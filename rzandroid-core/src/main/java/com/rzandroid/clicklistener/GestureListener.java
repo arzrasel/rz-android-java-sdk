@@ -6,8 +6,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 public abstract class GestureListener extends GestureDetector.SimpleOnGestureListener {
-    private GestureDetector gestureDetector;
-    //    private OnInternalClickListener onInternalClickListener;
+    //    private GestureDetector gestureDetector;
+        private OnClickListenerInner onClickListenerInner;
     //
     @Override
     public boolean onDown(MotionEvent event) {
@@ -43,8 +43,8 @@ public abstract class GestureListener extends GestureDetector.SimpleOnGestureLis
         return true;
     }
     //
-    public void setListener(Context context, View view) {
-        gestureDetector = new GestureDetector(context, new GestureListener() {
+    public static void setListener(Context context, View view, OnClickListener onClickListener) {
+        /*GestureDetector gestureDetector = new GestureDetector(context, new GestureListener() {
             @Override
             public void onSingleClick(MotionEvent event) {
                 onSingleClick(event);
@@ -54,6 +54,21 @@ public abstract class GestureListener extends GestureDetector.SimpleOnGestureLis
             public void onDoubleClick(MotionEvent event) {
                 onDoubleClick(event);
             }
+        });*/
+        GestureDetector gestureDetector = new GestureDetector(context, new GestureListener() {
+            @Override
+            public void onSingleClick(MotionEvent event) {
+                if(onClickListener != null) {
+                    onClickListener.onSingleClick(event);
+                }
+            }
+            //
+            @Override
+            public void onDoubleClick(MotionEvent event) {
+                if(onClickListener != null) {
+                    onClickListener.onDoubleClick(event);
+                }
+            }
         });
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -62,13 +77,18 @@ public abstract class GestureListener extends GestureDetector.SimpleOnGestureLis
             }
         });
     }
+    //
+    private interface OnClickListenerInner {
+        void onSingleClick(MotionEvent event);
+        void onDoubleClick(MotionEvent event);
+    }
     // Abstract function for implementation
     public abstract void onSingleClick(MotionEvent event);
     public abstract void onDoubleClick(MotionEvent event);
-    /*public interface OnInternalClickListener {
+    public interface OnClickListener {
         void onSingleClick(MotionEvent event);
         void onDoubleClick(MotionEvent event);
-    }*/
+    }
 }
 /*
 import android.view.GestureDetector;
@@ -78,7 +98,7 @@ import android.widget.ImageView;
 import com.rzandroid.clicklistener.GestureListener;
 //
 private GestureDetector gestureDetector;
-private ImageView imageView;
+private Button button;
 gestureDetector = new GestureDetector(this, new GestureListener() {
     @Override
     public void onSingleClick(MotionEvent event) {
@@ -90,14 +110,14 @@ gestureDetector = new GestureDetector(this, new GestureListener() {
         // TODO Auto-generated method stub
     }
 });
-imageView.setOnTouchListener(new View.OnTouchListener() {
+button.setOnTouchListener(new View.OnTouchListener() {
     @Override
     public boolean onTouch(View view, MotionEvent event) {
         return gestureDetector.onTouchEvent(event);
     }
 });
 // Or
-new GestureListener() {
+GestureListener.setListener(this, button, new GestureListener.OnClickListener() {
     @Override
     public void onSingleClick(MotionEvent event) {
         // TODO Auto-generated method stub
@@ -107,6 +127,6 @@ new GestureListener() {
     public void onDoubleClick(MotionEvent event) {
         // TODO Auto-generated method stub
     }
-}.setListener(this, imageView);
+});
 */
 //https://www.journaldev.com/28900/android-gesture-detectors

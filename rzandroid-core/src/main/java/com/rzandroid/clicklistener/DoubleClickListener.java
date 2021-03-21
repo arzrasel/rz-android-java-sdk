@@ -8,7 +8,7 @@ import android.view.View;
 public abstract class DoubleClickListener extends GestureDetector.SimpleOnGestureListener {
     //
     private GestureDetector gestureDetector;
-    //    private OnInternalClickListener onInternalClickListener;
+    private OnClickListenerInner onClickListenerInner;
     //
     @Override
     public boolean onDown(MotionEvent event) {
@@ -44,8 +44,8 @@ public abstract class DoubleClickListener extends GestureDetector.SimpleOnGestur
         return true;
     }
     //
-    public void setListener(Context context, View view) {
-        gestureDetector = new GestureDetector(context, new DoubleClickListener() {
+    public static void setListener(Context context, View view, GestureListener.OnClickListener onClickListener) {
+        /*GestureDetector gestureDetector = new GestureDetector(context, new GestureListener() {
             @Override
             public void onSingleClick(MotionEvent event) {
                 onSingleClick(event);
@@ -55,6 +55,21 @@ public abstract class DoubleClickListener extends GestureDetector.SimpleOnGestur
             public void onDoubleClick(MotionEvent event) {
                 onDoubleClick(event);
             }
+        });*/
+        GestureDetector gestureDetector = new GestureDetector(context, new DoubleClickListener() {
+            @Override
+            public void onSingleClick(MotionEvent event) {
+                if(onClickListener != null) {
+                    onClickListener.onSingleClick(event);
+                }
+            }
+            //
+            @Override
+            public void onDoubleClick(MotionEvent event) {
+                if(onClickListener != null) {
+                    onClickListener.onDoubleClick(event);
+                }
+            }
         });
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -63,9 +78,17 @@ public abstract class DoubleClickListener extends GestureDetector.SimpleOnGestur
             }
         });
     }
+    private interface OnClickListenerInner {
+        void onSingleClick(MotionEvent event);
+        void onDoubleClick(MotionEvent event);
+    }
     // Abstract function for implementation
-    abstract void onSingleClick(MotionEvent event);
-    abstract void onDoubleClick(MotionEvent event);
+    public abstract void onSingleClick(MotionEvent event);
+    public abstract void onDoubleClick(MotionEvent event);
+    public interface OnClickListener {
+        void onSingleClick(MotionEvent event);
+        void onDoubleClick(MotionEvent event);
+    }
 }
 /*
 import android.view.GestureDetector;

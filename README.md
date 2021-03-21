@@ -45,7 +45,7 @@ Variable declaration
 
 ```implementationDoubleClickListener01
 private GestureDetector gestureDetector;
-private ImageView imageView;
+private Button button;
 ```
 Code implementation
 ```implementationDoubleClickListener02
@@ -60,7 +60,7 @@ gestureDetector = new GestureDetector(this, new DoubleClickListener() {
         // TODO Auto-generated method stub
     }
 });
-imageView.setOnTouchListener(new View.OnTouchListener() {
+button.setOnTouchListener(new View.OnTouchListener() {
     @Override
     public boolean onTouch(View view, MotionEvent event) {
         return gestureDetector.onTouchEvent(event);
@@ -73,12 +73,11 @@ Second option:
 Variable declaration
 
 ```implementationDoubleClickListener03
-private GestureDetector gestureDetector;
-private ImageView imageView;
+private Button button;
 ```
-
+Code implementation
 ```implementationDoubleClickListener04
-new DoubleClickListener() {
+DoubleClickListener.setListener(this, button, new DoubleClickListener.OnClickListener() {
     @Override
     public void onSingleClick(MotionEvent event) {
         // TODO Auto-generated method stub
@@ -88,5 +87,5 @@ new DoubleClickListener() {
     public void onDoubleClick(MotionEvent event) {
         // TODO Auto-generated method stub
     }
-}.setListener(this, imageView);
+});
 ```
