@@ -25,7 +25,7 @@ allprojects {
 }
 ```
 
-Add maven repositories in project level
+Or add maven repositories in project level
 
 ```mavenRepositoriesAppProject
 allprojects {
@@ -33,4 +33,60 @@ allprojects {
         maven { url "https://dl.bintray.com/rzrasel/rz-android-java-sdk/" }
     }
 }
+```
+
+### Use of SQLite database class
+
+### Use of Double Click Listener
+
+First option:
+
+Variable declaration
+
+```implementationDoubleClickListener01
+private GestureDetector gestureDetector;
+private ImageView imageView;
+```
+Code implementation
+```implementationDoubleClickListener02
+gestureDetector = new GestureDetector(this, new DoubleClickListener() {
+    @Override
+    public void onSingleClick(MotionEvent event) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void onDoubleClick(MotionEvent event) {
+        // TODO Auto-generated method stub
+    }
+});
+imageView.setOnTouchListener(new View.OnTouchListener() {
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    }
+});
+```
+
+Second option:
+
+Variable declaration
+
+```implementationDoubleClickListener03
+private GestureDetector gestureDetector;
+private ImageView imageView;
+```
+
+```implementationDoubleClickListener04
+new DoubleClickListener() {
+    @Override
+    public void onSingleClick(MotionEvent event) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void onDoubleClick(MotionEvent event) {
+        // TODO Auto-generated method stub
+    }
+}.setListener(this, imageView);
 ```
