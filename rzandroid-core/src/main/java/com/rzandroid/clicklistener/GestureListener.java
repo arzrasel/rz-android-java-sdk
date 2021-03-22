@@ -43,7 +43,7 @@ public abstract class GestureListener extends GestureDetector.SimpleOnGestureLis
         return true;
     }
     //
-    public static void setListener(Context context, View view, OnClickListener onClickListener) {
+    public static void setEventListener(Context context, View view, OnClickListener onClickListener) {
         /*GestureDetector gestureDetector = new GestureDetector(context, new GestureListener() {
             @Override
             public void onSingleClick(MotionEvent event) {

@@ -44,7 +44,7 @@ public abstract class DoubleClickListener extends GestureDetector.SimpleOnGestur
         return true;
     }
     //
-    public static void setListener(Context context, View view, GestureListener.OnClickListener onClickListener) {
+    public static void setEventListener(Context context, View view, GestureListener.OnClickListener onClickListener) {
         /*GestureDetector gestureDetector = new GestureDetector(context, new GestureListener() {
             @Override
             public void onSingleClick(MotionEvent event) {

@@ -20,7 +20,7 @@ Add maven repositories in application level (if any problem to implementation th
 ```mavenRepositoriesAppProject
 allprojects {
     repositories {
-        maven { url "https://dl.bintray.com/rzrasel/rz-android-java-sdk/" }
+        maven { url "https://dl.bintray.com/rzrasel/rz-android-java-sdk" }
     }
 }
 ```
@@ -30,7 +30,7 @@ Or add maven repositories in project level
 ```mavenRepositoriesAppProject
 allprojects {
     repositories {
-        maven { url "https://dl.bintray.com/rzrasel/rz-android-java-sdk/" }
+        maven { url "https://dl.bintray.com/rzrasel/rz-android-java-sdk" }
     }
 }
 ```
@@ -88,4 +88,20 @@ DoubleClickListener.setListener(this, button, new DoubleClickListener.OnClickLis
         // TODO Auto-generated method stub
     }
 });
+```
+Use in kotlin
+```implementationDoubleClickListener04
+private Button button;
+```
+Code implementation
+```implementationDoubleClickListener05
+DoubleClickListener.setListener(context, itemView, object: DoubleClickListener.OnClickListener, GestureListener.OnClickListener {
+    override fun onSingleClick(event: MotionEvent?) {
+        // TODO Auto-generated method stub
+    }
+    //
+    override fun onDoubleClick(event: MotionEvent?) {
+        // TODO Auto-generated method stub
+    }
+})
 ```
