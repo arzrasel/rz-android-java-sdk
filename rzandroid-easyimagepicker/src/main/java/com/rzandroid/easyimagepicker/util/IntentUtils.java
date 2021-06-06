@@ -2,11 +2,13 @@ package com.rzandroid.easyimagepicker.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 
 import androidx.core.content.FileProvider;
+import androidx.documentfile.provider.DocumentFile;
 
 import com.rzandroid.easyimagepicker.R;
 
@@ -64,6 +66,39 @@ public class IntentUtils {
 
     public static boolean isCameraAppAvailable(Context argContext) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        return intent.resolveActivity(argContext.getPackageManager()) != null ? true : false;
+        return intent.resolveActivity(argContext.getPackageManager()) != null;
+    }
+
+    public static Intent getUriViewIntent(Context argContext, Uri argUri) {
+        Uri dataUri = null;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        String authority = argContext.getPackageName() + argContext.getString(R.string.image_picker_provider_authority_suffix);
+        DocumentFile file = DocumentFile.fromSingleUri(argContext, argUri);
+        if (file != null) {
+            if (file.canRead()) {
+                dataUri = argUri;
+            } else {
+                String filePath = getRealPathFromURI(argContext, argUri);
+                dataUri = FileProvider.getUriForFile(argContext, authority, new File(filePath));
+            }
+        }
+        intent.setDataAndType(dataUri, "image/*");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        return intent;
+    }
+
+    private static String getRealPathFromURI(Context argContext, Uri argContentURI) {
+        String filePath;
+        Cursor cursor = argContext.getContentResolver().query(argContentURI, null, null, null, null);
+        if (cursor == null) {
+            filePath = argContentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            filePath = cursor.getString(idx);
+            cursor.close();
+        }
+        return filePath;
     }
 }
