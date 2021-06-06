@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 import androidx.documentfile.provider.DocumentFile;
 
@@ -69,6 +70,7 @@ public class IntentUtils {
         return intent.resolveActivity(argContext.getPackageManager()) != null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static Intent getUriViewIntent(Context argContext, Uri argUri) {
         Uri dataUri = null;
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -78,7 +80,7 @@ public class IntentUtils {
             if (file.canRead()) {
                 dataUri = argUri;
             } else {
-                String filePath = getRealPathFromURI(argContext, argUri);
+                String filePath = FileUriUtils.getRealPath(argContext, argUri);
                 dataUri = FileProvider.getUriForFile(argContext, authority, new File(filePath));
             }
         }
@@ -86,19 +88,5 @@ public class IntentUtils {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
         return intent;
-    }
-
-    private static String getRealPathFromURI(Context argContext, Uri argContentURI) {
-        String filePath;
-        Cursor cursor = argContext.getContentResolver().query(argContentURI, null, null, null, null);
-        if (cursor == null) {
-            filePath = argContentURI.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            filePath = cursor.getString(idx);
-            cursor.close();
-        }
-        return filePath;
     }
 }
