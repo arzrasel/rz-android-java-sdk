@@ -14,10 +14,10 @@
             <option value="$PROJECT_DIR$/appusagesexample" />
             <option value="$PROJECT_DIR$/rzandroid" />
             <option value="$PROJECT_DIR$/rzandroid-core" />
+            <option value="$PROJECT_DIR$/rzandroid-easyimagepicker" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>
