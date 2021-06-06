@@ -39,3 +39,4 @@ dependencies {
 apply from: "https://raw.githubusercontent.com/rzrasel/maven-upload/master/bintray.gradle"
 apply from: "https://raw.githubusercontent.com/rzrasel/maven-upload/master/publications.gradle"
 //
+//Dhaval2404/ImagePicker
