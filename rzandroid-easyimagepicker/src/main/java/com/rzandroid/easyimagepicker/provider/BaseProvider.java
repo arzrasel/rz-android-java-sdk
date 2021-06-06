@@ -1,7 +1,7 @@
 package com.rzandroid.easyimagepicker.provider;
 
 public abstract class BaseProvider {
-    public BaseProvider(ImagePickerActivity argImagePickerActivity) {
+    /*public BaseProvider(ImagePickerActivity argImagePickerActivity) {
         //
-    }
+    }*/
 }
