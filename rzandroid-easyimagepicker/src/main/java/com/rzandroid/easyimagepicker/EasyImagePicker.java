@@ -45,8 +45,6 @@ public class EasyImagePicker {
 
     public class Builder {
         private Fragment fragment = null;
-
-        
         public Builder(Activity argActivity) {
             //
         }
