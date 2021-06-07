@@ -31,8 +31,6 @@ import kotlin.text.StringsKt;
 
 public class FileUtil {
     public static File getImageFile(File argFileDir, String argExtension) {
-        Intrinsics.checkNotNullParameter(argFileDir, "fileDir");
-
         try {
             // Create an image file name
             String ext = argExtension;
@@ -61,22 +59,18 @@ public class FileUtil {
     private static String getTimestamp() {
         String timeFormat = "yyyyMMdd_HHmmssSSS";
         String timeStamp = (new SimpleDateFormat(timeFormat, Locale.getDefault())).format(new Date());
-        Intrinsics.checkNotNullExpressionValue(timeStamp, "SimpleDateFormat(timeFor…Default()).format(Date())");
         return timeStamp;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public long getFreeSpace(File argFile) {
-        Intrinsics.checkNotNullParameter(argFile, "file");
         StatFs stat = new StatFs(argFile.getPath());
         long availBlocks = stat.getAvailableBlocksLong();
         long blockSize = stat.getBlockSizeLong();
         return availBlocks * blockSize;
     }
 
-    public Pair getImageResolution(Context argContext, Uri argUri) throws FileNotFoundException {
-        Intrinsics.checkNotNullParameter(argContext, "context");
-        Intrinsics.checkNotNullParameter(argUri, "uri");
+    public static Pair getImageResolution(Context argContext, Uri argUri) throws FileNotFoundException {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         InputStream stream = argContext.getContentResolver().openInputStream(argUri);
@@ -84,8 +78,7 @@ public class FileUtil {
         return new Pair(options.outWidth, options.outHeight);
     }
 
-    public Pair getImageResolution(File argFile) {
-        Intrinsics.checkNotNullParameter(argFile, "file");
+    public static Pair getImageResolution(File argFile) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(argFile.getAbsolutePath(), options);
@@ -93,16 +86,12 @@ public class FileUtil {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public final long getImageSize(Context argContext, Uri argUri) {
-        Intrinsics.checkNotNullParameter(argContext, "context");
-        Intrinsics.checkNotNullParameter(argUri, "uri");
+    public static long getImageSize(Context argContext, Uri argUri) {
         DocumentFile documentFile = getDocumentFile(argContext, argUri);
         return documentFile != null ? documentFile.length() : 0L;
     }
 
-    public final File getTempFile(Context argContext, Uri argUri) {
-        Intrinsics.checkNotNullParameter(argContext, "context");
-        Intrinsics.checkNotNullParameter(argUri, "uri");
+    public static File getTempFile(Context argContext, Uri argUri) {
 
         try {
             File destination = new File(argContext.getCacheDir(), "image_picker.png");
@@ -127,9 +116,7 @@ public class FileUtil {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public DocumentFile getDocumentFile(Context argContext, Uri argUri) {
-        Intrinsics.checkNotNullParameter(argContext, "context");
-        Intrinsics.checkNotNullParameter(argUri, "uri");
+    public static DocumentFile getDocumentFile(Context argContext, Uri argUri) {
         DocumentFile file = (DocumentFile) null;
         if (isFileUri(argUri)) {
             String path = FileUriUtils.getRealPath(argContext, argUri);
@@ -143,15 +130,12 @@ public class FileUtil {
         return file;
     }
 
-    public Bitmap.CompressFormat getCompressFormat(String argExtension) {
-        Intrinsics.checkNotNullParameter(argExtension, "extension");
+    public static Bitmap.CompressFormat getCompressFormat(String argExtension) {
         return StringsKt.contains((CharSequence) argExtension, (CharSequence) "png", true) ? Bitmap.CompressFormat.PNG : (StringsKt.contains((CharSequence) argExtension, (CharSequence) "webp", true) ? (Build.VERSION.SDK_INT >= 30 ? Bitmap.CompressFormat.WEBP_LOSSLESS : Bitmap.CompressFormat.WEBP) : Bitmap.CompressFormat.JPEG);
     }
 
-    public String getImageExtension(File argFile) {
-        Intrinsics.checkNotNullParameter(argFile, "file");
+    public static String getImageExtension(File argFile) {
         Uri uri = Uri.fromFile(argFile);
-        Intrinsics.checkNotNullExpressionValue(uri, "Uri.fromFile(file)");
         return getImageExtension(uri);
     }
 
@@ -168,7 +152,7 @@ public class FileUtil {
         return extension;
     }
 
-    private boolean isFileUri(Uri argUri) {
+    private static boolean isFileUri(Uri argUri) {
         return StringsKt.equals("file", argUri.getScheme(), true);
     }
 }

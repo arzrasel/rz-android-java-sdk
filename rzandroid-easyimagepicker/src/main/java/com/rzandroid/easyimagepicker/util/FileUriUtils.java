@@ -12,8 +12,6 @@ import android.provider.MediaStore;
 
 import androidx.annotation.RequiresApi;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

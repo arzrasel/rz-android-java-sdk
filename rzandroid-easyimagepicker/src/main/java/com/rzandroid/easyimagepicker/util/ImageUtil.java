@@ -15,7 +15,7 @@ import java.io.OutputStream;
 import kotlin.jvm.internal.Intrinsics;
 
 public class ImageUtil {
-    public File compressImage(File argImageFile, float argReqWidth, float argReqHeight, Bitmap.CompressFormat argCompressFormat, String argDestinationPath) throws IOException {
+    public static File compressImage(File argImageFile, float argReqWidth, float argReqHeight, Bitmap.CompressFormat argCompressFormat, String argDestinationPath) throws IOException {
         FileOutputStream fileOutputStream = null;
         File file = new File(argDestinationPath).getParentFile();
         if (!file.exists()) {
@@ -42,7 +42,7 @@ public class ImageUtil {
         return new File(argDestinationPath);
     }
 
-    private Bitmap decodeSampledBitmapFromFile(File argImageFile, float argReqWidth, float argReqHeight) throws IOException {
+    private static Bitmap decodeSampledBitmapFromFile(File argImageFile, float argReqWidth, float argReqHeight) throws IOException {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         Bitmap bitmap = BitmapFactory.decodeFile(argImageFile.getAbsolutePath(), options);
@@ -99,7 +99,7 @@ public class ImageUtil {
         return scaledBitmap;
     }
 
-    private int calculateInSampleSize(BitmapFactory.Options argOptions, int argReqWidth, int argReqHeight) {
+    private static int calculateInSampleSize(BitmapFactory.Options argOptions, int argReqWidth, int argReqHeight) {
         int height = argOptions.outHeight;
         int width = argOptions.outWidth;
         int inSampleSize = 1;
@@ -113,7 +113,7 @@ public class ImageUtil {
         return inSampleSize;
     }
 
-    private boolean canUseForInBitmap(Bitmap argCandidate, BitmapFactory.Options argTargetOptions) {
+    private static boolean canUseForInBitmap(Bitmap argCandidate, BitmapFactory.Options argTargetOptions) {
         boolean canUseBitmap;
         if (Build.VERSION.SDK_INT >= 19) {
             // From Android 4.4 (KitKat) onward we can re-use if the byte size of

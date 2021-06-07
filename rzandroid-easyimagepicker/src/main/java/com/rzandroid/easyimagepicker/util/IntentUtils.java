@@ -16,7 +16,7 @@ import com.rzandroid.easyimagepicker.R;
 import java.io.File;
 
 public class IntentUtils {
-    public Intent getGalleryIntent(Context argContext, String[] argMimeTypes) {
+    public static Intent getGalleryIntent(Context argContext, String[] argMimeTypes) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Intent intent = getGalleryDocumentIntent(argMimeTypes);
             if (intent.resolveActivity(argContext.getPackageManager()) != null) {
@@ -26,7 +26,7 @@ public class IntentUtils {
         return getLegacyGalleryPickIntent(argMimeTypes);
     }
 
-    private Intent getGalleryDocumentIntent(String[] argMimeTypes) {
+    private static Intent getGalleryDocumentIntent(String[] argMimeTypes) {
         // Show Document Intent
         //Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT).applyImageTypes(argMimeTypes);
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -38,7 +38,7 @@ public class IntentUtils {
         return intent;
     }
 
-    private Intent getLegacyGalleryPickIntent(String[] argMimeTypes) {
+    private static Intent getLegacyGalleryPickIntent(String[] argMimeTypes) {
         // Show Gallery Intent, Will open google photos
         Intent intent = new Intent(Intent.ACTION_PICK);
         return intent.putExtra(Intent.EXTRA_MIME_TYPES, argMimeTypes);

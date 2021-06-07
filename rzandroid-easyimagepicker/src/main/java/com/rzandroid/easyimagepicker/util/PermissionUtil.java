@@ -12,14 +12,14 @@ import java.util.List;
 
 public final class PermissionUtil {
 
-    public boolean isPermissionGranted(Context argContext, String argPermission) {
+    public static boolean isPermissionGranted(Context argContext, String argPermission) {
         //ActivityCompat
         int selfPermission = ContextCompat.checkSelfPermission(argContext, argPermission);
         selfPermission = PackageManager.PERMISSION_GRANTED;
         return selfPermission > 0 ? true : false;
     }
 
-    public boolean isPermissionGranted(Context argContext, String... argPermission) {
+    public static boolean isPermissionGranted(Context argContext, String... argPermission) {
         List<String> permissionNeeded = new ArrayList<>();
         for (String permission : argPermission) {
             if (ActivityCompat.checkSelfPermission(argContext, permission)
@@ -30,7 +30,7 @@ public final class PermissionUtil {
         return permissionNeeded.size() <= 0 ? true : false;
     }
 
-    public boolean isPermissionInManifest(Context argContext, String argPermission) {
+    public static boolean isPermissionInManifest(Context argContext, String argPermission) {
         try {
             PackageInfo packageInfo = argContext.getPackageManager().getPackageInfo(argContext.getPackageName(), PackageManager.GET_PERMISSIONS);
             String[] requestedPermissions = packageInfo.requestedPermissions;
