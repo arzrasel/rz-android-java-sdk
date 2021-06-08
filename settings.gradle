@@ -2,6 +2,6 @@ rootProject.name = "Rz Android Java SDK"
 include ":appusagesexample"
 include ":rzandroid"
 include ":rzandroid-core"
-include ":rzandroid-easyimagepicker"
-include ':rzandroid-propermission'
+//include ":rzandroid-easyimagepicker"
 include ":rzandroid-proimagepicker"
+include ':rzandroid-propermission'

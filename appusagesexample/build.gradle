@@ -41,5 +41,7 @@ dependencies {
     api "androidx.activity:activity-ktx:1.2.1"
     implementation project(":rzandroid")
     implementation project(":rzandroid-core")
-    implementation project(":rzandroid-easyimagepicker")
+    //implementation project(":rzandroid-easyimagepicker")
+    implementation project(":rzandroid-proimagepicker")
+    implementation project(":rzandroid-propermission")
 }
