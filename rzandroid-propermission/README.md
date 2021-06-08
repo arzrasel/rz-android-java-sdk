@@ -9,7 +9,7 @@ Rz Android Java SDK - PrePermission
 
 ```android_dependencies
 dependencies {
-    implementation "com.rzandroid.java:rzandroid-core:0.0.07"
+    implementation "com.rzandroid.java:rzandroid-propermission:0.0.11"
 }
 ```
 
