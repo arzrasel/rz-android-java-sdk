@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.rzandroid.clicklistener.DoubleClickListener;
 import com.rzandroid.clicklistener.GestureListener;
+import com.rzandroid.propermission.ProPermission;
 
 public class MainActivity extends AppCompatActivity {
     //
@@ -16,5 +17,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+    private void useProPermission() {
+        ProPermission proPermission;
     }
 }
